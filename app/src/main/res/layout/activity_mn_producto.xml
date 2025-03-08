@@ -16,5 +16,6 @@
         android:id="@+id/FrmProd_LstProd"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/FrmProd_SchBus" />
+        android:layout_below="@id/FrmProd_SchBus"
+        tools:listitem="@layout/config_prod" />
 </RelativeLayout>
