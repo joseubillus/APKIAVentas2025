@@ -25,12 +25,10 @@ class MnProducto : AppCompatActivity() {
 
         schbus = findViewById(R.id.FrmProd_SchBus)
         lstpro = findViewById(R.id.FrmProd_LstProd)
-        var adp = ArrayAdapter<String>(this,
-            android.R.layout.simple_list_item_1)
-        adp.add("Producto 1")
-        adp.add("Producto 2")
-        adp.add("Producto 3")
-        adp.add("Producto 4")
+        var adp = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1)
+        for (i in 0..200) {
+            adp.add("Producto "+i)
+        }
         lstpro.adapter = adp
     }
 }
