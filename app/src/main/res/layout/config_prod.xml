@@ -10,7 +10,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/FrmConfProd_Img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -23,25 +23,25 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/FrmConfProd_Lblid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="ID" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/FrmConfProd_Lblnom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nombre" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/FrmConfProd_Lblpre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Precio" />
 
             <RatingBar
-                android:id="@+id/ratingBar"
+                android:id="@+id/FrmConfProd_rtbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
