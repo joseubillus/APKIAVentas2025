@@ -8,6 +8,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.modelo.Producto
+import com.example.util.ADPProducto
 
 class MnProducto : AppCompatActivity() {
     private lateinit var lstpro:ListView
@@ -25,10 +27,9 @@ class MnProducto : AppCompatActivity() {
 
         schbus = findViewById(R.id.FrmProd_SchBus)
         lstpro = findViewById(R.id.FrmProd_LstProd)
-        var adp = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1)
-        for (i in 0..200) {
-            adp.add("Producto "+i)
-        }
+        var adp = ADPProducto(this)
+        for (i in 0..2000)
+            adp.getAdd(Producto("PR00"+i, "Producto",12.45,3,null))
         lstpro.adapter = adp
     }
 }

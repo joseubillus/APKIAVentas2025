@@ -37,16 +37,21 @@ class ADPProducto:BaseAdapter {
         return BD.get(p0).hashCode().toLong()
     }
 
-    override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
-        var root:View = p1!!
+    override fun getView(pos: Int, p1: View?, p2: ViewGroup?): View {
+        var root:View? = p1
         if(p1==null){
             root = LayoutInflater.from(ct).inflate(R.layout.config_prod,p2,false)
         }
 
-        val id:TextView = root.findViewById(R.id.FrmConfProd_Lblid)
+        val id:TextView = root!!.findViewById(R.id.FrmConfProd_Lblid)
         val nom:TextView = root.findViewById(R.id.FrmConfProd_Lblnom)
         val pre:TextView = root.findViewById(R.id.FrmConfProd_Lblpre)
-        
+
+        val pro = getItem(pos)
+        id.text = pro.getId
+        nom.text = pro.getNom
+        pre.text = pro.getPre.toString()
+
         return root
     }
 }
