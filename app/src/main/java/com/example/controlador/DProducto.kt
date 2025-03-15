@@ -8,6 +8,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler
 import com.loopj.android.http.RequestParams
 import cz.msebera.android.httpclient.Header
 import cz.msebera.android.httpclient.entity.StringEntity
+import org.json.JSONArray
 import org.json.JSONObject
 
 class DProducto(val c:Context) {
@@ -16,14 +17,11 @@ class DProducto(val c:Context) {
     public val lst:ListView? = null
 
     public fun getList(bus:String){
-        val jsonObject = JSONObject()
-        //jsonObject.put("txtbus",bus);
-        val entity: StringEntity = StringEntity(jsonObject.toString());
-        asyn.get(c,url,entity,"application/json",object:AsyncHttpResponseHandler(){
+        asyn.get(url,null,object:AsyncHttpResponseHandler(){
             override fun onSuccess(statusCode: Int,headers: Array<out Header>?,
                 responseBody: ByteArray?) {
                 val resp:String = java.lang.String(responseBody).toString()
-                Toast.makeText(c,"Resp:"+resp,Toast.LENGTH_LONG).show()
+                getJson(resp)
             }
             override fun onFailure(statusCode: Int, headers: Array<out Header>?,
                 responseBody: ByteArray?,error: Throwable?) {
@@ -31,4 +29,27 @@ class DProducto(val c:Context) {
             }
         })
     }
+
+    private fun getJson(dato:String){
+        var json = JSONArray(dato)
+        var r = json.getJSONObject(0).getString("nom")
+        Toast.makeText(c,"Dato:"+r,Toast.LENGTH_LONG).show()
+    }
+
+    /*public fun getList(bus:String){
+        val jsonObject = JSONObject()
+        //jsonObject.put("txtbus",bus);
+        val entity: StringEntity = StringEntity(jsonObject.toString());
+        asyn.get(c,url,entity,"application/json",object:AsyncHttpResponseHandler(){
+            override fun onSuccess(statusCode: Int,headers: Array<out Header>?,
+                                   responseBody: ByteArray?) {
+                val resp:String = java.lang.String(responseBody).toString()
+                Toast.makeText(c,"Resp:"+resp,Toast.LENGTH_LONG).show()
+            }
+            override fun onFailure(statusCode: Int, headers: Array<out Header>?,
+                                   responseBody: ByteArray?,error: Throwable?) {
+                Toast.makeText(c,"Error:$error",Toast.LENGTH_LONG).show()
+            }
+        })
+    }*/
 }
