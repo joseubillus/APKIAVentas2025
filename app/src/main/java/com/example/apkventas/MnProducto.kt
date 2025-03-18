@@ -26,14 +26,11 @@ class MnProducto : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        dpro = DProducto(this)
-        dpro.getList("")
-
-        /*schbus = findViewById(R.id.FrmProd_SchBus)
+        schbus = findViewById(R.id.FrmProd_SchBus)
         lstpro = findViewById(R.id.FrmProd_LstProd)
-        var adp = ADPProducto(this)
-        for (i in 0..2000)
-            adp.getAdd(Producto("PR00"+i, "Producto",12.45,3,null))
-        lstpro.adapter = adp*/
+
+        dpro = DProducto(this)
+        dpro.lst = lstpro
+        dpro.getList("")
     }
 }
