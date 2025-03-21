@@ -22,21 +22,28 @@ class DUsuario(val c:Context) {
 
         val jsonObject = JSONObject()
         jsonObject.put("id",0);
-        jsonObject.put("nombre_usuario",nom.toString());
-        jsonObject.put("contrasena",pas.toString());
-        val entity: StringEntity = StringEntity(jsonObject.toString());
+        jsonObject.put("nombre_usuario",nom);
+        jsonObject.put("contrasena",pas);
+        val entity = StringEntity(jsonObject.toString());
 
         asyn.post(c,url,entity,"application/json", object:AsyncHttpResponseHandler(){
         //asyn.get(c,url,entity,"application/json", object:AsyncHttpResponseHandler(){
             override fun onSuccess(statusCode: Int,headers: Array<out Header>?,
                 responseBody: ByteArray?) {
-                var resp = java.lang.String(responseBody).toString()
+                val resp:String = java.lang.String(responseBody).toString()
                 Toast.makeText(c,"Resp:$resp",Toast.LENGTH_LONG).show()
             }
 
             override fun onFailure(statusCode: Int,headers: Array<out Header>?,
                 responseBody: ByteArray?,error: Throwable?) {
-                Toast.makeText(c,"Error:$error",Toast.LENGTH_LONG).show()
+
+                if(responseBody!=null) {
+                    val responseString = String(responseBody) // Convertir el responseBody a String
+                    val jsonResponse = JSONObject(responseString) // Convertir a JSON
+                    val errorMessage = jsonResponse.optString("detail", "Error desconocido") // JSON detail'
+                    Toast.makeText(c, "Error: $errorMessage", Toast.LENGTH_LONG).show()
+                }else
+                    Toast.makeText(c,"Error:$error",Toast.LENGTH_LONG).show()
             }
         })
         return "Autorizado"
