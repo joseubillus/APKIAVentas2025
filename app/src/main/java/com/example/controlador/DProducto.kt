@@ -17,10 +17,10 @@ class DProducto(val c:Context) {
     private var asyn:AsyncHttpClient = AsyncHttpClient()
     private var url:String = "http://172.56.0.238:8080/productos/"
     private var Array:ArrayList<Producto> = ArrayList()
-    public var lst:ListView? = null
+    var lst:ListView? = null
 
 
-    public fun getList(bus:String){
+    fun getList(bus:String){
         asyn.get(url,null,object:AsyncHttpResponseHandler(){
             override fun onSuccess(statusCode: Int,headers: Array<out Header>?,
                 responseBody: ByteArray?) {
