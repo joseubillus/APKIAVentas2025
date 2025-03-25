@@ -1,7 +1,10 @@
 package com.example.controlador
 
 import android.content.Context
+import android.content.Intent
 import android.widget.Toast
+import com.example.apkventas.MnMenu
+import com.example.util.Mensaje
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import com.loopj.android.http.RequestParams
@@ -13,6 +16,7 @@ import org.json.JSONObject
 class DUsuario(val c:Context) {
     private var asyn:AsyncHttpClient = AsyncHttpClient()
     private var url:String  = "http://172.56.0.238:8080/login/"
+    private var ms:Mensaje = Mensaje(c)
 
     fun getValidar(nom:String,pas:String):String {
         /*var para:RequestParams = RequestParams()
@@ -27,16 +31,24 @@ class DUsuario(val c:Context) {
         val entity = StringEntity(jsonObject.toString());
 
         asyn.post(c,url,entity,"application/json", object:AsyncHttpResponseHandler(){
-        //asyn.get(c,url,entity,"application/json", object:AsyncHttpResponseHandler(){
+            override fun onStart() {
+                super.onStart()
+                ms.MProgressBarDato()
+            }
             override fun onSuccess(statusCode: Int,headers: Array<out Header>?,
                 responseBody: ByteArray?) {
+                ms.MCloseProgBar(true)
                 val resp:String = java.lang.String(responseBody).toString()
-                Toast.makeText(c,"Resp:$resp",Toast.LENGTH_LONG).show()
+                val jsonrep = JSONObject(resp).optString("mensaje")
+                if(jsonrep.equals("Autorizado"))
+                    c.startActivity(Intent(c,MnMenu::class.java))
+                else
+                    Toast.makeText(c,"Resp:$resp",Toast.LENGTH_LONG).show()
             }
 
             override fun onFailure(statusCode: Int,headers: Array<out Header>?,
                 responseBody: ByteArray?,error: Throwable?) {
-
+                ms.MCloseProgBar(true)
                 if(responseBody!=null) {
                     val responseString = String(responseBody) // Convertir el responseBody a String
                     val jsonResponse = JSONObject(responseString) // Convertir a JSON
