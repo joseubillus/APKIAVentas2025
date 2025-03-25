@@ -30,4 +30,8 @@
             android:icon="@drawable/baseline_account_circle_24"
             android:text="Usuario" />
     </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </RelativeLayout>
