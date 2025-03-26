@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
+import android.widget.SearchView
 import com.example.apkventas.R
+import com.example.controlador.DProducto
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +25,10 @@ class FragmeTabProd : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var lstpro: ListView
+    private lateinit var schbus: SearchView
+    private lateinit var dpro: DProducto
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -32,10 +39,17 @@ class FragmeTabProd : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragme_tab_prod, container, false)
+        savedInstanceState: Bundle?): View? {
+        val root:View? = inflater.inflate(R.layout.fragment_fragme_tab_prod, container, false)
+
+        schbus = root!!.findViewById(R.id.FrmFragProd_SchBus)
+        lstpro = root!!.findViewById(R.id.FrmFragProd_LstProd)
+
+        dpro = DProducto(root.context)
+        dpro.lst = lstpro
+        dpro.getList("")
+
+        return root
     }
 
     companion object {

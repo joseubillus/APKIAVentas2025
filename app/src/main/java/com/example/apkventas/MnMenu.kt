@@ -8,6 +8,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.apkventas.menu.FragmePadre
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 
 class MnMenu : AppCompatActivity() {
     private lateinit var tabPadre:TabLayout
@@ -30,5 +31,19 @@ class MnMenu : AppCompatActivity() {
                     lifecycle,
                     tabPadre.tabCount)
         viewP.adapter = fragPadre
+        tabPadre.addOnTabSelectedListener(object:OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                viewP.currentItem = tab!!.position?:0
+            }
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
+
+        viewP.registerOnPageChangeCallback(object:ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                tabPadre.getTabAt(position)?.select()
+            }
+        })
     }
 }

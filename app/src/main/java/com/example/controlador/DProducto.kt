@@ -15,7 +15,7 @@ import org.json.JSONObject
 
 class DProducto(val c:Context) {
     private var asyn:AsyncHttpClient = AsyncHttpClient()
-    private var url:String = "http://192.168.18.4:8080/productos/"
+    private var url:String = "http://172.56.0.238:8080/productos/"
     private var Array:ArrayList<Producto> = ArrayList()
     var lst:ListView? = null
 
